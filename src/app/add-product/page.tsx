@@ -1,9 +1,10 @@
+import FormSubmitButton from "@/components/FormSubmitButton";
 import prisma from "@/lib/db/prisma";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Add Product -Flomazon",
+  title: "Add Product - Flomazon",
 };
 
 async function addProduct(formData: FormData) {
@@ -26,15 +27,15 @@ async function addProduct(formData: FormData) {
 
 export default function AddProductPage() {
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl text-center mb-3 font-bold">Add Product</h1>
+    <div className="mx-auto max-w-2xl">
+      <h1 className="mb-3 text-center text-3xl font-bold">Add Product</h1>
       <form action={addProduct}>
         <input
           type="text"
           required
           name="name"
           placeholder="Name"
-          className="mb-3 input input-bordered w-full"
+          className="input input-bordered mb-3 w-full"
         />
         <textarea
           rows={3}
@@ -48,18 +49,16 @@ export default function AddProductPage() {
           required
           name="imageUrl"
           placeholder="Image URL"
-          className="mb-3 input input-bordered w-full"
+          className="input input-bordered mb-3 w-full"
         />
         <input
           type="number"
           required
           name="price"
           placeholder="Price"
-          className="mb-3 input input-bordered w-full"
+          className="input input-bordered mb-3 w-full"
         />
-        <button type="submit" className="btn btn-primary btn-block">
-          Add Product
-        </button>
+        <FormSubmitButton className="btn-block">Add Product</FormSubmitButton>
       </form>
     </div>
   );

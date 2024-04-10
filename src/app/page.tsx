@@ -1,42 +1,42 @@
+import ProductCard from "@/components/ProductCard";
 import prisma from "@/lib/db/prisma";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 
 export default async function Home() {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({
+    orderBy: { id: "desc" },
+  });
 
   return (
-    <div className="flex flex-col gap-8 items-center">
-      <div className="flex justify-between gap-6">
-        <h1 className="text-3xl">Welcome to Nextjs Ecommerce</h1>
-        <Link href={"/add-product"} className="btn btn-primary">
-          Add
-        </Link>
+    <div>
+      <div className="hero rounded-xl bg-base-200">
+        <div className="hero-content flex-col lg:flex-row">
+          <Image
+            src={products[0].imageUrl}
+            alt={products[0].name}
+            width={400}
+            height={800}
+            className="w-full max-w-sm rounded-lg shadow-2xl"
+            priority
+          />
+          <div>
+            <h1 className="text-5xl font-bold">{products[0].name}</h1>
+            <p className="py-6">{products[0].description}</p>
+            <Link
+              href={"/products/" + products[0].id}
+              className="btn btn-primary"
+            >
+              Check it out
+            </Link>
+          </div>
+        </div>
       </div>
 
-      <div className="flex gap-6 flex-wrap justify-center">
-        <Suspense
-          fallback={<h3 className="text-center text-3xl">Loading..</h3>}
-        >
-          {products?.length > 0 &&
-            products.map((product) => (
-              <div key={product.id} className="card bg-blue-50 max-w-sm">
-                <Image
-                  src={product.imageUrl}
-                  alt={product.name}
-                  width={320}
-                  height={240}
-                  className="w-full object-cover rounded-t-2xl h-[240px]"
-                />
-                <div className="card-body">
-                  <h2 className="card-title text-green-700">{product.name}</h2>
-                  <p>{product.description.substring(0, 145)}</p>
-                  <p className="font-bold">Price: ${product.price / 100}</p>
-                </div>
-              </div>
-            ))}
-        </Suspense>
+      <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {products.slice(1).map((product) => (
+          <ProductCard product={product} key={product.id} />
+        ))}
       </div>
     </div>
   );
