@@ -6,7 +6,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     GoogleProvider({
@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
       await mergeAnonymousCartIntoUserCart(user.id);
     },
   },
-};
+} satisfies NextAuthOptions;
 
 const handler = NextAuth(authOptions);
 
