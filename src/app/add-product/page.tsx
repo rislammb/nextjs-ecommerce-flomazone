@@ -1,9 +1,9 @@
 import FormSubmitButton from "@/components/FormSubmitButton";
+import { authOptions } from "@/lib/configs";
 import prisma from "@/lib/db/prisma";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export const metadata: Metadata = {
   title: "Add Product - Flomazon",

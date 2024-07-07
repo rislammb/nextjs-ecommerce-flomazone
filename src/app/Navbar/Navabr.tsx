@@ -4,10 +4,10 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import ShoppingCartButton from "./ShoppingCartButton";
 import UserMenuButton from "./UserMenuButton";
 import SearchForm from "./SearchForm";
+import { authOptions } from "@/lib/configs";
 
 async function searchProducts(formData: FormData) {
   "use server";
