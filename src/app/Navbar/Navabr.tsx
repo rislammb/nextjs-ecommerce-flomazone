@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import ShoppingCartButton from "./ShoppingCartButton";
 import UserMenuButton from "./UserMenuButton";
+import SearchForm from "./SearchForm";
 
 async function searchProducts(formData: FormData) {
   "use server";
@@ -32,15 +33,7 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className="flex-none gap-2">
-          <form action={searchProducts}>
-            <div className="form-control">
-              <input
-                name="searchQuery"
-                placeholder="Search"
-                className="input input-bordered w-full min-w-[100px]"
-              />
-            </div>
-          </form>
+          <SearchForm searchProducts={searchProducts} />
           <ShoppingCartButton cart={cart} />
           <UserMenuButton session={session} />
         </div>
