@@ -3,11 +3,13 @@ import Link from "next/link";
 interface PaginationBarProps {
   currentPage: number;
   totalPages: number;
+  query?: string;
 }
 
 export default function PaginationBar({
   currentPage,
   totalPages,
+  query,
 }: PaginationBarProps) {
   const maxPage = Math.min(totalPages, Math.max(currentPage + 4, 10));
   const minPage = Math.max(1, Math.min(currentPage - 5, maxPage - 9));
@@ -17,7 +19,7 @@ export default function PaginationBar({
   for (let page = minPage; page <= maxPage; page++) {
     numberedPageItems.push(
       <Link
-        href={"?page=" + page}
+        href={query ? `/search?query=${query}&page=${page}` : `?page=${page}`}
         key={page}
         className={`btn join-item ${currentPage === page ? "btn-active pointer-events-none" : ""}`}
       >
