@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Flomazon",
   description: "We make your wallet cry",
+  metadataBase: new URL("https://nextjs-ecommerce-flomazone.vercel.app"),
 };
 
 export default function RootLayout({
