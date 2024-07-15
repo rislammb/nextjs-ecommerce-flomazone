@@ -63,8 +63,11 @@ export default async function AddProductPage() {
           required
           name="imageUrl"
           placeholder="Image URL"
-          className="input input-bordered mb-3 w-full"
+          className="input input-bordered mb-1 w-full"
         />
+        <p className="mb-3 text-xs">
+          Image URL must be from <i>unsplash.com</i>
+        </p>
         <input
           type="number"
           required
